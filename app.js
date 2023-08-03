@@ -13,6 +13,7 @@ const userRoutes =require('./routes/user');
 
 app.use(bodyParser.json());
 
+app.use('/',userRoutes)
 app.use('/user',userRoutes)
 
 app.listen(3000);

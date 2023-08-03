@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="login-form">
+        <form>
+            <div class="email">
+                <label>Enter Your Email</label>
+                <input type="email" id="login-email"/>
+            </div>
+            <div class="password">
+                <label>Enter Your Password</label>
+                <input type="password" id="login-password"/>
+            </div>
+            <div class="login-btn">
+                <button type="button" onclick="login(event)">Login</button>
+            </div>
+        </form>
+        <div class="login-link">
+            <a href="/">Don't have account Sign Up</a>
+        </div>
+        <div id="user-exists"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+
+    <script src="/js/login.js"></script>
+    </div>
+</body>
+</html>

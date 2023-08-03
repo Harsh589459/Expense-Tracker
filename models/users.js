@@ -30,5 +30,23 @@ module.exports = class User{
             throw err; // Rethrow the error to handle it further up the chain if needed
           });
       }
+
+      loginUser(){
+        console.log('emai',this.email);
+        console.log("pass'",this.password)
+        return db.execute('SELECT * FROM Users WHERE Users.email=?',[this.email]).then((res)=>{
+         
+          if(res[0].length==0){
+            return "User doesn't exists";
+            
+          }
+          else if(res[0][0].password!==this.password){
+            return "Incorrect password";
+          }
+          else{
+            return "User logged in successfully";
+          }
+        })
+      }
       
 }
