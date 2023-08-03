@@ -1,4 +1,5 @@
-const db = require('../util/database')
+const db = require('../util/database');
+const bcrypt = require('bcrypt');
 
 module.exports = class User{
     constructor(name,email,password){
@@ -31,22 +32,34 @@ module.exports = class User{
           });
       }
 
-      loginUser(){
-        console.log('emai',this.email);
-        console.log("pass'",this.password)
-        return db.execute('SELECT * FROM Users WHERE Users.email=?',[this.email]).then((res)=>{
-         
-          if(res[0].length==0){
-            return "User doesn't exists";
-            
+      async loginUser() {
+        try {
+          const res = await db.execute('SELECT * FROM Users WHERE Users.email=?', [this.email]);
+          
+          if (res[0].length == 0) {
+            return "User doesn't exist";
           }
-          else if(res[0][0].password!==this.password){
-            return "Incorrect password";
-          }
-          else{
+      
+          console.log(res[0]);
+      
+          const match = await new Promise((resolve, reject) => {
+            bcrypt.compare(this.password, res[0][0].password, (err, result) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            });
+          });
+      
+          if (match) {
             return "User logged in successfully";
+          } else {
+            return "Password is incorrect";
           }
-        })
+        } catch (err) {
+          return "Something went wrong";
+        }
       }
       
 }
