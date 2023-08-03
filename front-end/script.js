@@ -20,6 +20,12 @@ function signUp(){
             const userExist=document.getElementById('user-exists');
             userExist.innerHTML='<div style="color:red">User already Exists</div>'
         }
+        else{
+            const userExist=document.getElementById('user-exists');
+            userExist.innerHTML=''
+
+
+        }
     }).catch(err=>console.log(err))
     
 }
