@@ -19,6 +19,7 @@ function login(event){
         if(response.data==="User logged in successfully"){
             userExist.innerHTML=''
             alert(response.data);
+            window.location.href="/expense";
         }
         else{
            
