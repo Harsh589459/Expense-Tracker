@@ -14,7 +14,6 @@ async function addExpense(event) {
 
     try {
         const response = await axios.post(`${endpoint}/expense`, data);
-        console.log(response.data);
         getAllExpense();
     } catch (err) {
         console.log(err);
@@ -24,9 +23,8 @@ async function addExpense(event) {
 async function getAllExpense() {
     try {
         const response = await axios.get(`${endpoint}/expense/getAllExpense`);
-        
         const expenseList = document.getElementById('expense-list');
-        expenseList.innerHTML='';
+        expenseList.innerHTML = '';
         for (let i = 0; i < response.data.length; i++) {
             const expenses = document.createElement('li')
             expenses.innerHTML = `<li>${response.data[i].amount}  ${response.data[i].description}   ${response.data[i].category}   <button onclick=deleteExpense(${response.data[i].id})>Delete</button></li> `;
@@ -37,18 +35,18 @@ async function getAllExpense() {
         console.log(err);
     }
 }
-async function deleteExpense(id){
-    try{
-    const response=await axios.post(`${endpoint}/expense/delete`,{id});
-    console.log(response);
-    if(response){
-        getAllExpense();
+async function deleteExpense(id) {
+    try {
+        const response = await axios.get(`${endpoint}/expense/delete/${id}`);
+
+        if (response) {
+            getAllExpense();
+        }
     }
-    }
-    catch(err){
+    catch (err) {
         console.log(err);
     }
-    
+
 
 }
 

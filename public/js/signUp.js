@@ -17,18 +17,18 @@ async function signUp(event) {
         email: email,
         password: password
     };
+    const userExist = document.getElementById('user-exists');
 
     try {
         const response = await axios.post(`${endpoint}/user/sign-up`, data);
-        const userExist = document.getElementById('user-exists');
-
-        if (response.data === 'User already exists') {
-            userExist.innerHTML = '<div style="color:red">User already Exists</div>';
-        } else {
+        console.log(response)
+      
             await alert("Signup Successfully");
             userExist.innerHTML = '';
-        }
+        
     } catch (err) {
-        console.log(err);
+        userExist.innerHTML = err.response.data;
+
+        console.log('err',err.response.data);
     }
 }
