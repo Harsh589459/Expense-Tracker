@@ -16,20 +16,14 @@ async function login(event){
     const userExist=document.getElementById('user-exists');
 
     try{
-    // const response = axios.post(`${endpoint}/user/login`,data).then(response=>{
-    //     console.log(response.data);
-    //     // if(response.data==="User logged in successfully"){
-    //     //     userExist.innerHTML=''
-    //     //     alert(response.data);
-    //     //     window.location.href="/expense";
-    //     // }
-    //     // else{
-           
-    //     //     userExist.innerHTML=`<div style="color:red">${response.data}</div>`
-    //     // }
-    // }).catch(err=>console.log(err))
-        const response = await axios.post(`${endpoint}/user/login`,data);
+        const response = await axios.post(`${endpoint}/user/login`,data)
+        console.log(response.data);
         await alert(response.data.message);
+        console.log(response.data.token);
+        localStorage.setItem('token',response.data.token);
+        window.location.href='/expense'
+
+        
 
 }catch(err){
     console.log(err.response);

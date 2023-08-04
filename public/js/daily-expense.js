@@ -13,7 +13,9 @@ async function addExpense(event) {
     }
 
     try {
-        const response = await axios.post(`${endpoint}/expense`, data);
+        const token=localStorage.getItem('token');
+
+        const response = await axios.post(`${endpoint}/expense`, data,{headers:{"Authorization":token}});
         getAllExpense();
     } catch (err) {
         console.log(err);
@@ -22,7 +24,8 @@ async function addExpense(event) {
 
 async function getAllExpense() {
     try {
-        const response = await axios.get(`${endpoint}/expense/getAllExpense`);
+        const token=localStorage.getItem('token');
+        const response = await axios.get(`${endpoint}/expense/getAllExpense`,{headers:{"Authorization":token}});
         const expenseList = document.getElementById('expense-list');
         expenseList.innerHTML = '';
         for (let i = 0; i < response.data.length; i++) {
@@ -37,7 +40,9 @@ async function getAllExpense() {
 }
 async function deleteExpense(id) {
     try {
-        const response = await axios.get(`${endpoint}/expense/delete/${id}`);
+        const token=localStorage.getItem('token');
+
+        const response = await axios.get(`${endpoint}/expense/delete/${id}`,{headers:{"Authorization":token}});
 
         if (response) {
             getAllExpense();

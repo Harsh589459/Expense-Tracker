@@ -16,18 +16,6 @@ exports.getSignUp = async (req, res, next) => {
 
 exports.postSignUp = async (req, res, next) => {
 
-    // becrypt.hash(password,10,async(err,hash)=>{
-    //     const user  =new User(name,email,hash);
-    //     user.signUpUser().then((response)=>{
-    //         console.log('response',response)
-    //         res.send(response);
-    //     }).catch((err)=>{
-    //         console.log(err);
-    //     })
-
-    // }).catch((err)=>{
-    //     res.status(500).json(err);
-    // })
 
     try {
         const { name, email, password } = req.body
@@ -54,8 +42,10 @@ exports.postSignUp = async (req, res, next) => {
     catch (error) {
         console.log(error);
     }
+}
 
-
+function generateAccessToken(id,email){
+    return jwt.sign({userId:id,email:email},'7f3251c2e0ac5bbf51dbf3f9d5b7a6959b8be2d5a3a421ed7c9fe4c781faa5d7')
 }
 exports.getLogin = async (req, res, next) => {
     try {
@@ -69,20 +59,12 @@ exports.getLogin = async (req, res, next) => {
 
 exports.postLogin = async (req, res, next) => {
 
-
-    // const user = new User(null, email, password);
-
-    // user.loginUser().then((response) => {
-    //     console.log("response", response)
-    //     res.send(response);
-    // }).catch((err) => {
-    //     console.log(err)
-    // })
     try {
         const { email, password } = req.body;
 
         await User.findOne({ where: { email: email } }).then((response) => {
             if (response) {
+                console.log(response);
                 becrypt.compare(password, response.password, (err, passwordMatch) => {
                     if (err) {
                         return res.status(500).json({ success: false, message: "Something Went wrong" })
@@ -90,7 +72,7 @@ exports.postLogin = async (req, res, next) => {
                     if (passwordMatch == true) {
                         return res.status(200).json({
                             success: true,
-                            message: "Logged In Successfully"
+                            message: "Logged In Successfully",token:generateAccessToken(response.id,response.email)
                         })
                     } else {
                         return res.status(401).json({
