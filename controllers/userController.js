@@ -4,7 +4,7 @@ const path = require('path');
 const becrypt = require('bcrypt');
 const jwt = require("jsonwebtoken")
 
-exports.getSignUp = async (req, res, next) => {
+const getSignUp = async (req, res, next) => {
     try {
         res.sendFile(path.join(__dirname, "../", "public", "views", "signUp.html"))
     }
@@ -12,9 +12,18 @@ exports.getSignUp = async (req, res, next) => {
         console.log(error)
     }
 }
+const isPremiumUser=async(req,res,next)=>{
+    try{
+        if(req.user.isPremiumUser){
+            return res.json({isPremiumUser:true});
+        }
+    }catch(error){
+        console.log(error);
+    }
+}
 
 
-exports.postSignUp = async (req, res, next) => {
+const postSignUp = async (req, res, next) => {
 
 
     try {
@@ -29,7 +38,7 @@ exports.postSignUp = async (req, res, next) => {
                     await User.create({
                         name: name,
                         email: email,
-                        password: password
+                        password: hash,
                     })
                 })
                 res.status(200).send(`<script>User Created Successfully';window.location.href='/'</script>`)
@@ -47,7 +56,7 @@ exports.postSignUp = async (req, res, next) => {
 function generateAccessToken(id,email){
     return jwt.sign({userId:id,email:email},'7f3251c2e0ac5bbf51dbf3f9d5b7a6959b8be2d5a3a421ed7c9fe4c781faa5d7')
 }
-exports.getLogin = async (req, res, next) => {
+const getLogin = async (req, res, next) => {
     try {
         res.sendFile(path.join(__dirname, "../", "public", "views", "login.html"))
     }
@@ -57,7 +66,7 @@ exports.getLogin = async (req, res, next) => {
 
 }
 
-exports.postLogin = async (req, res, next) => {
+const postLogin = async (req, res, next) => {
 
     try {
         const { email, password } = req.body;
@@ -93,4 +102,12 @@ exports.postLogin = async (req, res, next) => {
     } catch (err) {
         console.log(err);
     }
+}
+module.exports={
+    generateAccessToken,
+    getLogin,
+    postLogin,
+    postSignUp,
+    getSignUp,
+    isPremiumUser,
 }

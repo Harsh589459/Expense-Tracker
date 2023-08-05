@@ -11,7 +11,8 @@ const User = sequelize.define("Users",{
   },
   name:Sequelize.STRING,
   email:Sequelize.STRING,
-  password:Sequelize.STRING
+  password:Sequelize.STRING,
+  isPremiumUser:Sequelize.BOOLEAN
 }, {
   timestamps: false, // Disable timestamps
 });

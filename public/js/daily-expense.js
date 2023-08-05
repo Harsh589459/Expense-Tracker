@@ -1,3 +1,4 @@
+
 const endpoint = 'http://localhost:3000';
 
 async function addExpense(event) {
@@ -54,5 +55,46 @@ async function deleteExpense(id) {
 
 
 }
+document.getElementById('rzp-button1').onclick=async function(e){
+    const token =  localStorage.getItem('token');
+    const response = await axios.get(`${endpoint}/purchase/premiumMembership`,{headers:{"Authorization":token}})
+    console.log(response.data);
+    console.log(response.data.order.id);
+    var options ={
+        key:response.data.key_id,//Enter the key id generated from the dashboard
+        order_id:response.data.order.id,//for one time payment
+        ////this handler function will handle the success payment
+        handler:async function(response){
+            await axios.post(`${endpoint}/purchase/updateTransactionStatus`,{
+                order_id:options.order_id,
+                payment_id:response.razorpay_payment_id,
+            },{headers:{"Authorization":token}})
+            alert("You are premium user now")
+        }
+    }
+    const rzp1 = new Razorpay(options);
+    rzp1.open();
+    e.preventDefault();
 
+    rzp1.on('payment.failed',function(response){
+        console.log(response)
+        alert("Payment Failed")
+    })
+}
+
+async function isPremiumUser(){
+    const token = localStorage.getItem('token');
+    const res =await axios.get(`${endpoint}/isPremiumUser`,{
+        headers:{Authorization:token},
+    })
+    if(res.data.isPremiumUser){
+        console.log("premium>>>>>>>>>>>>>>..")
+        document.getElementById('rzp-button1').style.display='none';
+        document.getElementById('is-premium').innerHTML=`<div>You are a Premium User now</div>`
+        document.getElementById('is-premium').style.color='red';
+
+
+    }
+}
+isPremiumUser();
 getAllExpense();
