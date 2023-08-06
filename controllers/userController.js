@@ -15,8 +15,12 @@ const getSignUp = async (req, res, next) => {
 }
 const isPremiumUser=async(req,res,next)=>{
     try{
+        console.log(req.user.isPremiumUser)
         if(req.user.isPremiumUser){
             return res.json({isPremiumUser:true});
+        }
+        else{
+            return res.json({isPremiumUser:false})
         }
     }catch(error){
         console.log(error);

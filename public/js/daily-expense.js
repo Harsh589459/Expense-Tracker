@@ -88,6 +88,7 @@ async function isPremiumUser(){
     const res =await axios.get(`${endpoint}/isPremiumUser`,{
         headers:{Authorization:token},
     })
+
     if(res.data.isPremiumUser){
         // document.getElementById('rzp-button1').style.display='none';
         // document.getElementById('is-premium').innerHTML=`<div>You are a Premium User now</div>`
@@ -98,7 +99,7 @@ async function isPremiumUser(){
 
     }
     else{
-        document.getElementById('isPremium').style.display='block';
+        document.getElementById('is-premium').style.display='block';
     }
 }
  async function showLeaderBoards(){
@@ -108,9 +109,10 @@ async function isPremiumUser(){
         console.log(res);
         document.getElementById('leader-board-list').style.display='block';
         let leaderBoard=document.getElementById('leader-board-list')
+        leaderBoard.innerHTML='';
 
     res.data.forEach((user)=>{
-            leaderBoard.innerHTML+=`<li>Name-${user.name} Total Expenses- ${user.total_cost}`
+            leaderBoard.innerHTML+=`<li>Name-${user.name} Total Expenses- ${user.totalExpenses|| 0}`
     
 
     })
