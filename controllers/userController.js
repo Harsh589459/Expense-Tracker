@@ -2,7 +2,8 @@ const db = require('../util/database')
 const User = require('../models/userModel');
 const path = require('path');
 const becrypt = require('bcrypt');
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const sequelize = require('../util/database');
 
 const getSignUp = async (req, res, next) => {
     try {
@@ -103,6 +104,9 @@ const postLogin = async (req, res, next) => {
         console.log(err);
     }
 }
+
+
+
 module.exports={
     generateAccessToken,
     getLogin,

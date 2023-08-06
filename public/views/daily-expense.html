@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/dailyExpenses.css">
+
 </head>
 <body>
     <div class="daily-expense">
@@ -29,15 +31,21 @@
                 <button type="button" onclick="addExpense(event)">Add Expense</button>
             </div>
         </form>
-        <div id="is-premium">
+        <div id="is-premium" style="display: none;">
             <button id="rzp-button1">Buy Premium</button>
             <script  src="https://checkout.razorpay.com/v1/checkout.js"> </script>
-
+        </div>
+        <div id="premium-features" style="display: none;">
+            <p style="color:red">You are a Premium User Now</p>
+            <button id="leader-board" onclick="showLeaderBoards()">Show Leaderboard</button>
         </div>
         <ul ID="expense-list">
+            <h1>Expenses</h1>
 
         </ul>
-        
+        <ul id="leader-board-list" style="display:none;">
+            <h1>LeaderBoards</h1>
+        </ul>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>

@@ -12,7 +12,11 @@ const User = sequelize.define("Users",{
   name:Sequelize.STRING,
   email:Sequelize.STRING,
   password:Sequelize.STRING,
-  isPremiumUser:Sequelize.BOOLEAN
+  isPremiumUser:Sequelize.BOOLEAN,
+  totalExpenses:{
+    type:Sequelize.INTEGER,
+    defaultValue:0,
+  }
 }, {
   timestamps: false, // Disable timestamps
 });

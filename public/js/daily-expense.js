@@ -69,7 +69,8 @@ document.getElementById('rzp-button1').onclick=async function(e){
                 order_id:options.order_id,
                 payment_id:response.razorpay_payment_id,
             },{headers:{"Authorization":token}})
-            alert("You are premium user now")
+            alert("You are premium user now");
+            isPremiumUser()
         }
     }
     const rzp1 = new Razorpay(options);
@@ -88,13 +89,35 @@ async function isPremiumUser(){
         headers:{Authorization:token},
     })
     if(res.data.isPremiumUser){
-        console.log("premium>>>>>>>>>>>>>>..")
-        document.getElementById('rzp-button1').style.display='none';
-        document.getElementById('is-premium').innerHTML=`<div>You are a Premium User now</div>`
-        document.getElementById('is-premium').style.color='red';
+        // document.getElementById('rzp-button1').style.display='none';
+        // document.getElementById('is-premium').innerHTML=`<div>You are a Premium User now</div>`
+        // document.getElementById('is-premium').style.color='red';
+        // document.getElementById('is-premium').innerHTML=`<button>Show Leader Boards</div>`
+        document.getElementById('premium-features').style.display='block';
 
 
     }
+    else{
+        document.getElementById('isPremium').style.display='block';
+    }
 }
+ async function showLeaderBoards(){
+    const token = localStorage.getItem('token');
+    const res = await axios.get(`${endpoint}/premium/showLeaderBoard`,{
+        headers:{Authorization:token}})
+        console.log(res);
+        document.getElementById('leader-board-list').style.display='block';
+        let leaderBoard=document.getElementById('leader-board-list')
+
+    res.data.forEach((user)=>{
+            leaderBoard.innerHTML+=`<li>Name-${user.name} Total Expenses- ${user.total_cost}`
+    
+
+    })
+ }
+
+
+
+
 isPremiumUser();
 getAllExpense();
