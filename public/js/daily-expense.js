@@ -118,7 +118,10 @@ async function isPremiumUser(){
     })
  }
 
-
+function showReports(){
+    console.log("first")
+    window.location.href='/premium/reports';
+}
 
 
 isPremiumUser();
