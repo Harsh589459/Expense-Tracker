@@ -17,6 +17,7 @@ const foregetPasswordRoutes = require('./routes/forgetPassword')
 const User = require('./models/userModel');
 const Expense = require('./models/expenseModel')
 const Order = require("./models/ordersModel")
+const forgotPassword = require('./models/forgotpassword');
 
 app.use(cors())
 
@@ -34,5 +35,8 @@ Expense.belongsTo(User);
 
 User.hasMany(Order);
 Order.belongsTo(User);
+
+User.hasMany(forgotPassword);
+forgotPassword.belongsTo(User);
 
 app.listen(3000);
