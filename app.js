@@ -3,8 +3,12 @@ const express = require('express');
 const app = express();
 const cors = require('cors')
 const bodyParser = require('body-parser');
-const dotenv = require('dotenv')
+
+const dotenv = require('dotenv');
+
+// get config vars
 dotenv.config();
+
 
 
 const userRoutes =require('./routes/user');
@@ -39,4 +43,4 @@ Order.belongsTo(User);
 User.hasMany(forgotPassword);
 forgotPassword.belongsTo(User);
 
-app.listen(3000);
+app.listen(process.env.PORT);

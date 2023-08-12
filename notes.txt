@@ -1,0 +1,37 @@
+Files could be images -> images,words,
+
+How to store the Files
+1.Storing in the server - Wrong way
+    --file has been stored in the harddisk
+    -whenever you nedd the file you can simiply read or send it from your server
+
+When your app starts scaling (number of users have increased)
+--4gp ram , server would start slowing down
+
+To overcome this problem
+1. Vertical scaling -- 8gb ram >>16gb  ram >>32 gb ram
+
+2.Horizontal scaling -> 2 Servers 8 Gb Ram each
+    server 1 -> 
+    server 2 ->               store the files in DFS -> (any server can access it)
+    server 3 ->
+
+    never store files in server store it in DFS 
+
+
+
+
+
+
+<------------------------AWS S3(DFS)---------------------------------->
+
+AWS S3 ->Storing Files
+
+-99.99 availability
+-any server can access the files inside s3 if permission are granted
+-hosting files
+-Versioning
+
+AWS 
+-Admin Account - root(read,write,delete,update)(CTO,senior manager)
+- IAM roles->restrict the user to product 1

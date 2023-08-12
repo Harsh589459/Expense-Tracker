@@ -7,6 +7,8 @@ router.use(express.static("public"))
 
 router.get('/forget-password',forgetPasswordController.getforgetPasswordPage)
 router.post('/forgotpassword',forgetPasswordController.postForgetPassword)
+router.get("/resetPasswordPage",forgetPasswordController.resetPasswordPage)
+router.post("/resetPassword",forgetPasswordController.updatePassword);
 
 
 module.exports=router;
