@@ -35,3 +35,33 @@ AWS S3 ->Storing Files
 AWS 
 -Admin Account - root(read,write,delete,update)(CTO,senior manager)
 - IAM roles->restrict the user to product 1
+
+
+<----------------------what does it takes to upload to s3 via code------------------------------------------->
+
+-Make an IAM user who atleast has s3access- s3bot
+
+In your code 
+  --go ahead and upload this file -> .csv, .txt , .mov, .jpeg
+  --which bucket you have to put this file
+  --IAM User ->username (accesskey id) and password  (secret key)
+  --make the file url: public
+
+  response{
+    location:https://expensetracker123.s3.amazonaws.com/familyphoto.pn
+  }
+  error{
+    log the error
+    send a response back to frontend failed (500);
+
+  }
+
+
+
+  MVC ===>M-->model(DB schema)
+            -->View(json resonse)
+            -->Controller(Logic Part)
+
+Service folder -->Doing any network call
+                ->DB calls 
+                ->

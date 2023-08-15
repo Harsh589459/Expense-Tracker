@@ -40,7 +40,7 @@
               <label for="date" class="form-label"> Select Date</label>
               <input type="date" class="form-control" id="date"/>
             </div>
-            <button id="dateShowBtn" type="submit" class="btn btn-primary showBtn">Show</button>
+            <button onclick="showDailyReport(event)" id="dateShowBtn" type="button" class="btn btn-primary showBtn">Show</button>
           </form>
         </div>
       </div>
@@ -56,9 +56,8 @@
           <thead>
             <tr>
               <th scope="col">Date</th>
-              <th scope="col">Category</th>
-              <th scope="col">Description</th>
-              <th scope="col">Amount</th>
+              <th scope="col">Report Links</th>
+              
             </tr>
           </thead>
 
@@ -91,7 +90,7 @@
               <label for="month" class="form-label">Select Month</label>
               <input type="month" class="form-control" id="month" />
             </div>
-            <button id="monthShowBtn" type="submit" class="btn btn-primary showBtn">Show</button>
+            <button id="monthShowBtn" onclick="showMonthlyReport(event)"  type="button" class="btn btn-primary showBtn">Show</button>
           </form>
         </div>
       </div>
@@ -107,9 +106,8 @@
           <thead>
             <tr>
               <th scope="col">Date</th>
-              <th scope="col">Category</th>
-              <th scope="col">Description</th>
-              <th scope="col">Amount</th>
+              <th scope="col">Links</th>
+              
             </tr>
           </thead>
 

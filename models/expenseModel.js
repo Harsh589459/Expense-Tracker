@@ -27,6 +27,5 @@ const Expenses = sequelize.define("expense", {
         allowNull:true,
     }
 }, {
-    timestamps: false, // Disable timestamps
 });
 module.exports = Expenses;

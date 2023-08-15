@@ -123,6 +123,42 @@ function showReports(){
     window.location.href='/premium/reports';
 }
 
+function download(){
+    const token = localStorage.getItem('token');
+    axios.get( `${endpoint}/user/download`,{headers:{Authorization:token}}).then((response)=>{
+        if(response.status===200){
+            //the backend is essentially sending a download link
+            //which if we open in browser ,file would download
+            var a = document.createElement("a");
+            a.href=response.data.fileUrl;
+            console.log(response);
+            a.download= 'myexpense.csv';
+            a.click();
+        }else{
+            throw new Error(response.data.message);
+        }
+    }).catch((err)=>{
+        console.log(err);
+    })
+}
+async function addReport(url){
+    try{
+    const token = localStorage.getItem('token');
+    const headers={
+        Authorization:token,
+    }
+    console.log(url);
+    const data = {
+        url:url,
+    }
+    const response = await axios.post(`${endpoint}/reports/post-report`,{headers:{Authorization:token}},{url:url})
+    console.log(response);
+      
+}catch(err){
+    console.log(err);
+    
+}
+}
 
 isPremiumUser();
 getAllExpense();
