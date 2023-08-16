@@ -5,7 +5,7 @@ const User = require('../models/userModel')
 const sequelize = require("../util/database");
 const UserServices = require("../services/userServices")
 const S3Service = require('../services/S3services')
-const reports= require('../models/reportModel');
+const reports = require('../models/reportModel');
 
 
 
@@ -19,8 +19,21 @@ exports.getExpense = async (req, res, next) => {
 }
 exports.getAllExpense = async (req, res, next) => {
     try {
-        const expense = await DailyExpense.findAll({ where: { userId: req.user.id } })
-        res.json(expense);
+        const pageNo = req.params.page;
+        const limit = 10;
+        const offset = (pageNo - 1) * limit;
+        const totalExpenses = await DailyExpense.count({
+            where: { userId: req.user.id }
+        });
+        const totalPages = Math.ceil(totalExpenses / limit);
+
+        const expense = await DailyExpense.findAll({
+            where: { userId: req.user.id },
+            offset: offset,
+            limit: limit
+        })
+
+        res.json({expense:expense,totalPages:totalPages});
 
     } catch (error) {
         console.log(error)
@@ -32,8 +45,9 @@ exports.addExpense = async (req, res, next) => {
     const t = await sequelize.transaction();
 
     try {
-        const { amount, description, category } = req.body;
+        const { amount, description, category,date } = req.body;
         await DailyExpense.create({
+            date:date,
             amount: amount,
             description: description,
             category: category,
@@ -85,35 +99,36 @@ exports.deleteExpense = async (req, res, next) => {
 
 }
 exports.downloadexpense = async (req, res) => {
-    try{
-    const expenses = await UserServices.getExpenses(req)
-    const stringifiedExpenses = JSON.stringify(expenses);
-    console.log(stringifiedExpenses);
-    const userId = req.user.id
+    try {
+        const expenses = await UserServices.getExpenses(req)
+        const stringifiedExpenses = JSON.stringify(expenses);
+        console.log(stringifiedExpenses);
+        const userId = req.user.id
 
-    //file name should depend on userid
-    const filename = `Expense${userId}/${new Date()}.txt`
-    const fileUrl = await S3Service.uploadToS3(stringifiedExpenses, filename);
-    const today = new Date();
+        //file name should depend on userid
+        const filename = `Expense${userId}/${new Date()}.txt`
+        const fileUrl = await S3Service.uploadToS3(stringifiedExpenses, filename);
+        const today = new Date();
 
-let year = today.getFullYear();
-let month = today.getMonth() + 1; // Adding 1 because month is zero-based
-let day = today.getDate();
-month = month < 10 ? `0${month}` : month;
-day = day < 10 ? `0${day}` : day;
+        let year = today.getFullYear();
+        let month = today.getMonth() + 1; // Adding 1 because month is zero-based
+        let day = today.getDate();
+        month = month < 10 ? `0${month}` : month;
+        day = day < 10 ? `0${day}` : day;
 
-const formattedDate = `${year}-${month}-${day}`;
-console.log(">>>>>>>>>>",typeof(formattedDate))
+        const formattedDate = `${year}-${month}-${day}`;
+        console.log(">>>>>>>>>>", typeof (formattedDate))
 
-    const response = await reports.create({
-        link:fileUrl,
-        UserId:userId,
-        date:formattedDate
+        const response = await reports.create({
+            link: fileUrl,
+            UserId: userId,
+            date: formattedDate
 
-    })
+        })
 
-    res.status(200).json({ fileUrl, success: true })
-}catch(err){
-    res.status(500).json({fileUrl:'',success:false,err:err})
-}}
+        res.status(200).json({ fileUrl, success: true })
+    } catch (err) {
+        res.status(500).json({ fileUrl: '', success: false, err: err })
+    }
+}
 
