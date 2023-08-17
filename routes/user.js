@@ -12,4 +12,5 @@ router.post('/login',userController.postLogin);
 router.post('/sign-up',userController.postSignUp);
 router.get('/isPremiumUser',userAuthentication.authentication,userController.isPremiumUser)
 router.get('/download',userAuthentication.authentication,expenseController.downloadexpense)
+router.get('/leaderboards',expenseController.getLeaderBoardPage);
 module.exports=router;

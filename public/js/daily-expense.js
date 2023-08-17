@@ -13,6 +13,8 @@ const logoutBtn = document.getElementById("logoutBtn");
 
 
 
+
+
 categoryItems.forEach((item) => {
     item.addEventListener("click", (e) => {
       const selectedCategory = e.target.getAttribute("data-value");
@@ -75,9 +77,12 @@ async function addExpense(event) {
 }
 
 async function getAllExpense() {
+    const limit = document.getElementById("page").value;
+
+    console.log("limit>>>>>>>>>>>",limit)
     try {
         const token = localStorage.getItem('token');
-        const res = await axios.get(`${endpoint}/expense/getAllExpense/1`, { headers: { "Authorization": token } });
+        const res = await axios.post(`${endpoint}/expense/getAllExpense/1`, {limit:limit}, { headers: { "Authorization": token } });
         table.innerHTML="";
         res.data.expense.forEach((expenses) => {
             const id = expenses.id;
@@ -225,22 +230,7 @@ async function isPremiumUser() {
     premium.style.display = 'block';
     }
 }
-async function showLeaderBoards() {
-    const token = localStorage.getItem('token');
-    const res = await axios.get(`${endpoint}/premium/showLeaderBoard`, {
-        headers: { Authorization: token }
-    })
-    console.log(res);
-    document.getElementById('leader-board-list').style.display = 'block';
-    let leaderBoard = document.getElementById('leader-board-list')
-    leaderBoard.innerHTML = '';
 
-    res.data.forEach((user) => {
-        leaderBoard.innerHTML += `<li>Name-${user.name} Total Expenses- ${user.totalExpenses || 0}`
-
-
-    })
-}
 
 function showReports() {
     console.log("first")
@@ -284,6 +274,74 @@ async function addReport(url) {
     }
 }
 async function paginationBtn(e) {
+    try {
+        const limit = document.getElementById("page").value;
+
+        const pageNo = e.target.textContent;
+        const token = localStorage.getItem("token");
+        const res = await axios.post(
+          `${endpoint}/expense/getAllExpense/${pageNo}`,{limit:limit},
+          { headers: { Authorization: token } }
+        );
+    
+        table.innerHTML = "";
+    
+        res.data.expense.forEach((expenses) => {
+          const id = expenses.id;
+          const date = expenses.date;
+          const categoryValue = expenses.category;
+          const descriptionValue = expenses.description;
+          const amountValue = expenses.amount;
+    
+          let tr = document.createElement("tr");
+          tr.className = "trStyle";
+    
+          table.appendChild(tr);
+    
+          let idValue = document.createElement("th");
+          idValue.setAttribute("scope", "row");
+          idValue.setAttribute("style", "display: none");
+    
+          let th = document.createElement("th");
+          th.setAttribute("scope", "row");
+    
+          tr.appendChild(idValue);
+          tr.appendChild(th);
+    
+          idValue.appendChild(document.createTextNode(id));
+          th.appendChild(document.createTextNode(date));
+    
+          let td1 = document.createElement("td");
+          td1.appendChild(document.createTextNode(categoryValue));
+    
+          let td2 = document.createElement("td");
+          td2.appendChild(document.createTextNode(descriptionValue));
+    
+          let td3 = document.createElement("td");
+          td3.appendChild(document.createTextNode(amountValue));
+    
+          let td4 = document.createElement("td");
+    
+          let deleteBtn = document.createElement("button");
+          deleteBtn.className = "editDelete btn btn-danger delete";
+          deleteBtn.appendChild(document.createTextNode("Delete"));
+    
+          let editBtn = document.createElement("button");
+          editBtn.className = "editDelete btn btn-success edit";
+          editBtn.appendChild(document.createTextNode("Edit"));
+    
+          td4.appendChild(deleteBtn);
+          td4.appendChild(editBtn);
+    
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          tr.appendChild(td3);
+          tr.appendChild(td4);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+
 }
 
 table.addEventListener("click", (e) => {

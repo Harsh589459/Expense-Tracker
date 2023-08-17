@@ -9,6 +9,9 @@ const reports = sequelize.define("reports", {
     },
     date:{
         type:Sequelize.STRING,
+    },
+    month:{
+        type:Sequelize.STRING
     }
   
   

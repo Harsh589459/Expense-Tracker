@@ -6,5 +6,5 @@ const premiumFeatureController = require('../controllers/premiumFeatureControlle
 const reportsController = require('../controllers/reportsController')
 router.get('/showLeaderBoard',userAuthentication.authentication,premiumFeatureController.getUserLeaderboard)
 router.get('/reports',reportsController.getReportsPage);
-router.get('/getReportList',userAuthentication.authentication,reportsController.downloadLinkGet)
+router.get('/getReportList',userAuthentication.authentication,reportsController.downloadDailyLinkGet)
 module.exports=router;

@@ -18,9 +18,10 @@ exports.getExpense = async (req, res, next) => {
     }
 }
 exports.getAllExpense = async (req, res, next) => {
+    console.log(">>>>>>>limit",req.body);
     try {
         const pageNo = req.params.page;
-        const limit = 10;
+        const limit = Number(req.body.limit);
         const offset = (pageNo - 1) * limit;
         const totalExpenses = await DailyExpense.count({
             where: { userId: req.user.id }
@@ -117,12 +118,13 @@ exports.downloadexpense = async (req, res) => {
         day = day < 10 ? `0${day}` : day;
 
         const formattedDate = `${year}-${month}-${day}`;
-        console.log(">>>>>>>>>>", typeof (formattedDate))
+        const formattedMonth = `${year}-${month}`
 
         const response = await reports.create({
             link: fileUrl,
             UserId: userId,
-            date: formattedDate
+            date: formattedDate,
+            month:formattedMonth
 
         })
 
@@ -130,5 +132,14 @@ exports.downloadexpense = async (req, res) => {
     } catch (err) {
         res.status(500).json({ fileUrl: '', success: false, err: err })
     }
+}
+exports.getLeaderBoardPage=async(req,res)=>{
+    try {
+        res.sendFile(path.join(__dirname, '../', "public", "views", "leaderboards.html"))
+    }
+    catch (err) {
+        res.sendStatus(504).json(err);
+    }
+
 }
 

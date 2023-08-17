@@ -60,7 +60,7 @@
  -->
 
 
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -103,8 +103,8 @@
               &#128081</a>
           </li>
           <li class="nav-item">
-            <a id="leaderboardLink" class="nav-link active" aria-current="page" href="#"
-              onclick="onClickAlert();">LeaderBoard &#128081</a>
+            <a id="leaderboardLink" class="nav-link active" aria-current="page" href="/leaderboards"
+              onclick="showLeaderBoards()">LeaderBoard &#128081</a>
           </li>
         </ul>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -240,6 +240,20 @@
         <li class="page-item"><a class="page-link" href="#">3</a></li> -->
       </ul>
     </nav>
+    <div class="pagination" style="font-size: 20px;">
+      <label for="page">Items per Page:</label>
+      <select id="page" onchange="getAllExpense()">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <!-- Add more options as needed -->
+      </select>
+    </div>
+  </div>
+
+  <div class="d-grid gap-2 m-4  p-4 d-flex justify-content-center">
+    <button class="btn btn-dark w-25 " type="button" onclick="download()">Download Report</button>
   </div>
 
 
@@ -253,10 +267,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"
     integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
 
-    <script src="/js/daily-expense.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+
+  <script src="/js/daily-expense.js"></script>
 
 </body>
 

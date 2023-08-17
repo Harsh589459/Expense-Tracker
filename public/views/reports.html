@@ -22,8 +22,38 @@
 
   <body>
  
-    <!-- Daily Table -->
-
+    <nav class="navbar navbar-expand-lg navbar-dark" id="navigation">
+      <div class="container-fluid">
+       
+        <a class="navbar-brand" href="/expense">Expense Tracker</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/expense">Home</a>
+            </li>
+            <li class="nav-item">
+              <a id="reportsLink" class="nav-link active" aria-current="page" href="/premium/reports" onclick="showReports()">Reports
+                &#128081</a>
+            </li>
+            <li class="nav-item">
+              <a id="leaderboardLink" class="nav-link active" aria-current="page" href="/leaderboards"
+                onclick="showLeaderBoards()">LeaderBoard &#128081</a>
+            </li>
+          </ul>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button id="buyPremiumBtn" class="topBtn btn py-1 d-none" type="button" data-bs-toggle="tooltip"
+              data-bs-placement="left" title="Premium Membership inclues LeaderBoard & Daily & Monthly Reports">
+              Buy Premium &#128081
+            </button>
+            <button id="logoutBtn" class="topBtn btn py-1" type="button">Log out</button>
+          </div>
+        </div>
+      </div>
+    </nav>
     <div
       class="container table-responsive mt-4 p-3 d-flex bd-highlight"
       id="table"
