@@ -125,3 +125,13 @@ body {
   border: none;
   border-radius: 5px;
 }
+
+.pagination {
+  font-size: 20px;
+}
+#example{
+width:100%;
+}
+#buyPremiumBtn{
+  display: none;
+}

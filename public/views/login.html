@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdnjs.cloudflare.com" >
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' cdnjs.cloudflare.com 'script-src 'unsafe-hashes' 'sha256-abc...'	'"> -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' cdnjs.cloudflare.com; script-src 'self' 'nonce-randomnoncehere'"> -->
+
     <title>Document</title>
 </head>
 <body>
@@ -17,7 +21,7 @@
                 <input type="password" id="login-password"/>
             </div>
             <div class="login-btn">
-                <button type="button" onclick="login(event)">Login</button>
+                <button type="button" id="loginBtn">Login</button>
             </div>
         </form>
         <div class="login-link">

@@ -7,9 +7,11 @@ const form = document.getElementById("form1");
 const addExpenseBtn = document.getElementById("submitBtn");
 const table = document.getElementById("tbodyId");
 const buyPremiumBtn = document.getElementById("buyPremiumBtn");
-const reportsLink = document.getElementById("reportsLink");
 const leaderboardLink = document.getElementById("leaderboardLink");
 const logoutBtn = document.getElementById("logoutBtn");
+const showReportBtn = document.getElementById('reportsLink')
+const downloadBtn = document.getElementById('downloadReport');
+const page = document.getElementById('page');
 
 
 
@@ -22,8 +24,7 @@ categoryItems.forEach((item) => {
       categoryInput.value = selectedCategory;
     });
   });
-async function addExpense(event) {
-    event.preventDefault();
+async function addExpense() {
     // let amount = document.getElementById('amount').value;
     // let description = document.getElementById('description').value;
     // let category = document.getElementById('category').value;
@@ -206,13 +207,12 @@ document.getElementById('buyPremiumBtn').onclick = async function (e) {
     })
 }
 
-async function isPremiumUser() {
+async function isPremiumUser() { 
     const token = localStorage.getItem('token');
     const res = await axios.get(`${endpoint}/isPremiumUser`, {
         headers: { Authorization: token },
     })
     const premium=document.getElementById('buyPremiumBtn')
-
     if (res.data.isPremiumUser) {
         // document.getElementById('rzp-button1').style.display='none';
         // document.getElementById('is-premium').innerHTML=`<div>You are a Premium User now</div>`
@@ -221,8 +221,8 @@ async function isPremiumUser() {
 
 
         // document.getElementById('premium-features').style.display = 'block';
+        premium.style.display="block"
         premium.innerHTML="You are a premium User"
-        premium.style="btn-dark"
 
 
     }
@@ -348,6 +348,10 @@ table.addEventListener("click", (e) => {
     deleteExpense(e);
   });
 
-
-isPremiumUser();
-getAllExpense();
+addExpenseBtn.addEventListener("click",addExpense);
+document.addEventListener('DOMContentLoaded',getAllExpense,isPremiumUser)
+showReportBtn.addEventListener('click',showReports)
+downloadBtn.addEventListener('click',download)
+page.addEventListener('change',getAllExpense)
+// isPremiumUser();
+// getAllExpense();

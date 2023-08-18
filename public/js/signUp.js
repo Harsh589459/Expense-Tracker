@@ -1,7 +1,6 @@
 const endpoint = 'http://localhost:3000';
-
-async function signUp(event) {
-    event.preventDefault
+const signUpBtn = document.getElementById('signUpBtn')
+async function signUp() {
     let name = document.getElementById('signup-name').value;
     let email = document.getElementById('signup-email').value;
     let password = document.getElementById('signup-password').value;
@@ -32,3 +31,4 @@ async function signUp(event) {
         console.log('err',err.response.data);
     }
 }
+signUpBtn.addEventListener('click',signUp)

@@ -1,7 +1,10 @@
-const endpoint = 'http://localhost:3000'
+const endpoint = 'http://localhost:3000';
 
-async function login(event) {
-    event.preventDefault();
+const loginBtn = document.getElementById("loginBtn");
+
+
+async function login() {
+    // event.preventDefault();
     let email = document.getElementById('login-email').value;
     let password = document.getElementById('login-password').value;
 
@@ -35,3 +38,4 @@ function forgetPassword() {
 
 }
 
+loginBtn.addEventListener("click",login);

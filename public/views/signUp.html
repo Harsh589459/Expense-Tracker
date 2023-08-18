@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdnjs.cloudflare.com">
+
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Document</title>
     <link rel="stylesheet" href="/css/signUp.css">
 
@@ -24,7 +28,7 @@
             <input type="password" id="signup-password" required>
         </div>
         <div class="signup-btn">
-            <button type="button" onclick="signUp(event)">Sign Up</button>
+            <button type="button" id="signUpBtn">Sign Up</button>
         </div>
     </form>
     <div class="login-link">
@@ -34,5 +38,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
 
     <script src="/js/signUp.js"></script>
+
 </body>
 </html>
