@@ -76,9 +76,9 @@ exports.addExpense = async (req, res, next) => {
 exports.deleteExpense = async (req, res, next) => {
     const t = await sequelize.transaction();
 
+
     const id = req.params.id;
-    console.log(id);
-    console.log(req.user);
+  
     try {
         const expense = await DailyExpense.findByPk(id);
         await DailyExpense.destroy({ where: { id: id, userId: req.user.id }, transaction: t })

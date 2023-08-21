@@ -1,8 +1,10 @@
+
 const endpoint = 'http://localhost:3000';
+const submitBtn = document.getElementById('forget-mail')
+const exists = document.getElementById('user-exists')
 
 
-async function forgetPassword(e){
-    e.preventDefault();
+async function forgetPassword(){
     let email = document.getElementById('email').value;
     const userDetails={
         email:email,
@@ -11,16 +13,20 @@ async function forgetPassword(e){
     try{
      response = await axios.post(`${endpoint}/password/forgotpassword`,userDetails)
      
-        if(responses.status===202){
-            document.body.innerHTML+='<div style="color:red">Mail Successfully Sent</div>'
+        if(response){
+            exists.innerHTML=response.message;
         }
-        else{
+     else{
+
             throw new Error("Something Went Wrong!!")
         }
    
     
     }
     catch(err){
+exists.innerHTML=err.response.data.message;
         console.log(err);
     }
 }
+console.log(submitBtn)
+submitBtn.addEventListener('click',forgetPassword)

@@ -1,6 +1,7 @@
 const endpoint = 'http://localhost:3000';
 
 const loginBtn = document.getElementById("loginBtn");
+const hs = document.getElementById('hs')
 
 
 async function login() {
@@ -33,9 +34,18 @@ async function login() {
         userExist.innerHTML = err.response.data.message;
     }
 }
-function forgetPassword() {
-    window.location.href = '/password/forget-password';
 
-}
 
-loginBtn.addEventListener("click",login);
+loginBtn.addEventListener("click", login);
+
+hs.addEventListener('click', function () {
+    let password = document.getElementById('login-password')
+    if (password.type === "password") {
+        hs.src = '/views/show.svg';
+        password.type = 'text';
+    }
+    else {
+        hs.src = '/views/hide.svg';
+        password.type = 'password';
+    }
+})

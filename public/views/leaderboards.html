@@ -10,8 +10,8 @@
   <link rel="stylesheet" href="/css/dailyExpenses.css" />
   <style>
     .table>:not(caption)>*>* {
-    border: 1px solid;
-}
+      border: 1px solid;
+    }
   </style>
 
 </head>
@@ -19,7 +19,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark" id="navigation">
     <div class="container-fluid">
-     
+
       <a class="navbar-brand" href="/expense">Expense Tracker</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,8 @@
             <a class="nav-link active" aria-current="page" href="/expense">Home</a>
           </li>
           <li class="nav-item">
-            <a id="reportsLink" class="nav-link active" aria-current="page" href="/premium/reports" onclick="showReports()">Reports
+            <a id="reportsLink" class="nav-link active" aria-current="page" href="/premium/reports"
+              onclick="showReports()">Reports
               &#128081</a>
           </li>
           <li class="nav-item">
@@ -44,7 +45,9 @@
             data-bs-placement="left" title="Premium Membership inclues LeaderBoard & Daily & Monthly Reports">
             Buy Premium &#128081
           </button>
-          <button id="logoutBtn" class="topBtn btn py-1" type="button">Log out</button>
+          <div class=" p-2 fs-5 text-bg-success" id="premium-user">
+            You are a premium User
+          </div>
         </div>
       </div>
     </div>

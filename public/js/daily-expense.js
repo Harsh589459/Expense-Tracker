@@ -213,6 +213,9 @@ async function isPremiumUser() {
         headers: { Authorization: token },
     })
     const premium=document.getElementById('buyPremiumBtn')
+    const premiumUser = document.getElementById('premium-user');
+    const reports = document.getElementById('nav-reports')
+    const leaderboards = document.getElementById('nav-leaderboards')
     if (res.data.isPremiumUser) {
         // document.getElementById('rzp-button1').style.display='none';
         // document.getElementById('is-premium').innerHTML=`<div>You are a Premium User now</div>`
@@ -221,9 +224,9 @@ async function isPremiumUser() {
 
 
         // document.getElementById('premium-features').style.display = 'block';
-        premium.style.display="block"
-        premium.innerHTML="You are a premium User"
-
+        premiumUser.style.display='block'
+        reports.style.display='block'
+        leaderboards.style.display='block'
 
     }
     else {
@@ -349,7 +352,9 @@ table.addEventListener("click", (e) => {
   });
 
 addExpenseBtn.addEventListener("click",addExpense);
-document.addEventListener('DOMContentLoaded',getAllExpense,isPremiumUser)
+document.addEventListener('DOMContentLoaded',getAllExpense)
+document.addEventListener('DOMContentLoaded',isPremiumUser)
+
 showReportBtn.addEventListener('click',showReports)
 downloadBtn.addEventListener('click',download)
 page.addEventListener('change',getAllExpense)

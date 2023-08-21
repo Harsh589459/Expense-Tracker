@@ -7,6 +7,7 @@ const client = Sib.ApiClient.instance;
 const User = require('../models/userModel')
 
 const apiKey = client.authentications['api-key']
+console.log("pr>>>>>>>>>>>>>>",process.env.SIB_API_KEY);
 apiKey.apiKey = process.env.SIB_API_KEY;
 const Forgotpassword = require('../models/forgotPasswordModel')
 const transEmailApi = new Sib.TransactionalEmailsApi();
@@ -61,14 +62,13 @@ exports.postForgetPassword = async (req, res) => {
     // }
     try {
         const { email } = req.body;
+        console.log(email);
         const requestId = uuid.v4();
         const recepientEmail = await User.findOne({ where: { email: email } })
         if (!recepientEmail) {
             return res.status(404).json({ message: "Please provide the registered email!" })
         }
-        console.log('id', requestId)
-        console.log(isActive)
-        console.log(rece)
+      
         const resetRequest = await Forgotpassword.create({
             id: requestId,
             isActive: true,
@@ -102,7 +102,7 @@ exports.postForgetPassword = async (req, res) => {
     }
     catch (err) {
         console.error(err)
-        return res.status(409).json({ message: "failed changing password" });
+        return res.status(409).json({ message: "Failed to changing password" });
     }
 }
 
@@ -117,6 +117,7 @@ exports.resetPasswordPage = async (req, res, next) => {
 }
 exports.updatePassword = async (req, res, next) => {
     try {
+        console.log("res>>>>>>>>>>>>>>>.",req);
         const requestId = req.headers.referer.split("/");
         const password = req.body.password;
         const checkResetRequest = await Forgotpassword.findAll({
@@ -141,8 +142,9 @@ exports.updatePassword = async (req, res, next) => {
         }
     } catch (err) {
         console.log(err);
-        return res.status(409).json({ message: "Failded to change password!" })
+        return res.status(409).json({ message: "Failed to change password!" })
 
     }
+   
 
 }

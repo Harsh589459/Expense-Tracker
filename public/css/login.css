@@ -25,7 +25,7 @@ body {
     margin-top: 100px;
 }
 
-.signup-heading {
+.login-heading {
     color: var(--heading, #212B27);
     text-align: center;
     margin-top: 50px;
@@ -35,7 +35,7 @@ body {
     line-height: 71.794px;
 }
 
-.signup-subheading {
+.login-subheading {
     color: var(--paragraph, #32403B);
     text-align: center;
     font-size: 23.011px;
@@ -43,7 +43,7 @@ body {
     line-height: 29.914px;
 }
 
-.signup-form {
+.login-form {
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -57,15 +57,14 @@ input {
     padding-left: 10px;
 }
 
-.signup-mail,
-.signup-name,
-.signup-password,
-.signup-btn {
+.login-mail,
+.login-password,
+.login-btn {
     display: flex;
     justify-content: center;
 }
 
-.signUpBtn {
+.loginBtn {
     color: #FFF;
     font-family: Karla;
     font-size: 33.749px;
@@ -73,34 +72,50 @@ input {
     line-height: 43.874px;
     border-radius: 23.011px;
     background: #84C7AE;
-    padding: 10px 30px;
+    padding: 5px 30px;
 }
 
 .login-link {
     display: flex;
     justify-content: center;
 }
-#user-exists{
+
+#user-exists {
     display: flex;
     justify-content: center;
     font-size: 20px;
     color: red;
 }
-.signup-password{
+
+.login-password {
     justify-content: flex-end;
 }
-.hs{
+
+.hs {
     position: relative;
     right: 35px;
     width: 20px;
     cursor: pointer;
 }
-.show{
+
+.show {
     display: none;
 }
-button{
+
+button {
     cursor: pointer;
 }
-.forget-page{
-    height: 350px;
+
+.forget-password {
+    display: flex;
+    justify-content: center;
+}
+
+.f-password {
+    color: blue;
+    font-size: 20px;
+    text-decoration: none;
+}
+.f-password:hover{
+    text-decoration: underline;
 }

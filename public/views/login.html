@@ -1,39 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdnjs.cloudflare.com" >
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdnjs.cloudflare.com">
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' cdnjs.cloudflare.com 'script-src 'unsafe-hashes' 'sha256-abc...'	'"> -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' cdnjs.cloudflare.com; script-src 'self' 'nonce-randomnoncehere'"> -->
 
     <title>Document</title>
+    <link rel="stylesheet" href="/css/login.css">
+
 </head>
+
 <body>
-    <div class="login-form">
-        <form>
-            <div class="email">
-                <label>Enter Your Email</label>
-                <input type="email" id="login-email"/>
+    <div>
+        <img class="left-rectangle" src="/views/rectangle-8.svg" id="png" />
+    </div>
+    <div class="full-container">
+        <div class="login-heading">
+            Login
+        </div>
+        <div class="login-subheading">
+Sign in to your Account        </div>
+        <form class="login-form">
+            <div class="login-mail">
+                <input type="email" id="login-email" placeholder="Enter your Email"/>
             </div>
-            <div class="password">
-                <label>Enter Your Password</label>
-                <input type="password" id="login-password"/>
+            <div class="login-password">
+                <input type="password" id="login-password"placeholder="Enter your Password"/>
+                <img class="hide hs" src="/views/hide.svg" id="hs" />
+
             </div>
             <div class="login-btn">
-                <button type="button" id="loginBtn">Login</button>
+                <button type="button" class="loginBtn" id="loginBtn">Login</button>
             </div>
         </form>
         <div class="login-link">
-            <a href="/">Don't have account Sign Up</a>
+            Don't have account?<a href="/">Sign Up</a>
         </div>
         <div class="forget-password">
-            <button onclick="forgetPassword()">Forget Password</button>
+            <!-- <button onclick="forgetPassword()">Forget Password</button> -->
+            <a class="f-password" href="/password/forget-password">Forget Password?</a>
         </div>
         <div id="user-exists"></div>
+       
+    </div>
+    <div>
+        <img class="right-rectangle" src="/views/rectangle-7.svg" id="png" />
+
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
 
     <script src="/js/login.js"></script>
-    </div>
 </body>
+
 </html>

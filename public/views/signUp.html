@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdnjs.cloudflare.com">
 
@@ -13,31 +14,50 @@
 
 
 </head>
+
 <body>
-    <form>
-        <div class="signup-name">
-            <label>Enter your Name</label>
-            <input type="text" id="signup-name" required/>
-        </div>
-        <div class="signup-mail">
-            <label>Enter your email</label>
-            <input type="email" id="signup-email" required/>
-        </div>
-        <div class="signup-password">
-            <label>Enter Password</label>
-            <input type="password" id="signup-password" required>
-        </div>
-        <div class="signup-btn">
-            <button type="button" id="signUpBtn">Sign Up</button>
-        </div>
-    </form>
-    <div class="login-link">
-        <a href="/login">Already a user login</a>
+    <div>
+        <img class="left-rectangle" src="/views/rectangle-8.svg" id="png" />
     </div>
-    <div id="user-exists"></div>
+    <div class="full-container">
+        <div class="signup-heading">
+            Create Your Account
+        </div>
+        <div class="signup-subheading">
+            Create an account to enjoy all the services in the Expense Tracker App
+        </div>
+        <form class="signup-form">
+            <div class="signup-name">
+                <input type="text" id="signup-name" placeholder="Enter your name" required />
+            </div>
+            <div class="signup-mail">
+                <input type="email" id="signup-email" placeholder="Enter your Email " required />
+            </div>
+            <div class="signup-password">
+                <input type="password" id="signup-password" placeholder="Enter your Password" required>
+                <img class="hide hs" src="/views/hide.svg" id="hs" />
+                
+            </div>
+
+            <div class="signup-btn">
+                <button type="button" id="signUpBtn" class="signUpBtn">Create Account</button>
+            </div>
+        </form>
+        <div class="login-link">
+            Already have an account?<a href="/login">Login</a>
+        </div>
+        <div id="user-exists"></div>
+
+    </div>
+
+    <div>
+        <img class="right-rectangle" src="/views/rectangle-7.svg" id="png" />
+
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
 
     <script src="/js/signUp.js"></script>
 
 </body>
+
 </html>

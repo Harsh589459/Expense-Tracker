@@ -65,3 +65,17 @@ In your code
 Service folder -->Doing any network call
                 ->DB calls 
                 ->
+
+
+-----------------------------------DEPLOYMENT------------------------------------------------------
+1) Signed Up on Aws - credit/debit card
+2)AWS free tier
+3) Backend Ready - move all secrets to the .env file
+4)AWS - You have o go buy a server
+5)Configuring your server (
+  Install node 
+  Sql Server
+  Git
+)
+
+6)Running your SQL SERVER on a different server
